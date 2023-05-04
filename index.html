@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="index.js"></script>
+  <script>
+      listJobType();
+      getEmployee();
+
+  </script>
+  </head>
+  <body class="p-3 m-0 border-0">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Manage Employees</h2>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary" onclick="addEmpModal()" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><span>Add New Employee</span></button>
+        <button type="button" class="btn btn-danger" onclick="showDel()"><span>Delete Employee</span></button>
+      </div>
+      </div>    
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+            <span class="custom-checkbox">
+              <input type="checkbox" id="selectAll" onclick="selectAll()">
+              <label for="selectAll"></label>
+            </span>
+          </th>
+        <th>Firstname</th>
+        <th>LastName</th>
+        <th>Gender</th>
+        <th>JobType</th>
+        <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="employee_data">
+    </tbody>
+    </table>
+  <input id="empId" type="hidden" value="-1">
+  <div id="deleteEmployeeModal" class="modal fade delete_emp">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Employee</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closemodal('deleteEmployeeModal')" id="close" aria-label="Close"></button>
+              </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete these Records?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+            </div>
+            <input type="hidden" id="delete_id">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary"  onclick="closemodal('deleteEmployeeModal')" data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-danger" onclick="deleteEmployee()" value="Delete">
+            </div>
+        </div>
+    </div>
+  </div>
+  <div id="noRecords" class="modal fade delete_emp">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Employee</h4>
+                <button type="button" class="btn-close"  onclick="closemodal('noRecords')" data-bs-dismiss="modal" id="close" aria-label="Close"></button>
+              </div>
+            <div class="modal-body">
+                <p>No Records seleted</p>
+            </div>
+            <input type="hidden" id="delete_id">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="closemodal('noRecords')" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="addEmployeeModal"  class="modal fade add_employee">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form>
+          <div class="modal-header">						
+            <h4 class="modal-title add-title" id="add-title">Add Employee</h4>
+            <button type="button" class="btn-close" onclick="closeEdit()" data-bs-dismiss="modal" id="close" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">					
+            <div class="form-group">
+              <label>FirstName</label>
+              <input type="text" id="firstname" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>LastName</label>
+              <input type="text" id="lastname" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <div><label>Gender</label></div>
+              <input type="radio" name="gender" value="male" > Male</input>
+              <input type="radio" name="gender" value="female"> Female</input>
+              <input type="radio" name="gender" value="other"> Other</input>
+
+            </div>
+            <div class="form-group">
+              <label>JobType</label>
+              <select class="form-control" id="jobtype" required>
+              </select>
+            </div>					
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeEdit()" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="addEmployee()">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>  
+
+  </body>
+  
+</html>
